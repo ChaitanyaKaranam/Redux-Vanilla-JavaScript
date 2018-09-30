@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="todo.js"></script>
     <title>Redux with Vanilla JavaScript</title>
 </head>
-
 <body>
     <div class="container">
         <h5>To-Do list</h5>
@@ -28,32 +29,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Learn Redux</td>
-                        <td>
-                            <label>
-                                <input type="checkbox" />
-                                <span></span>
-                            </label>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+            <input type="text" name="newTodo" id="newTodo" placeholder="Enter New To-do item" required>
+            <button class="btn" onclick="addRow(event)">Add To-Do list</button>
         </form>
-        <button onclick="addRow()">Add To-Do list</button>
+        <br>
+        
+        <br><br><br>
+        <div class="row">
+            <div class="card col l5 grey darken-3 white-text">
+                <span class="card-title">Completed Tasks</span>
+                <div class="card-content">
+                    <ul id="completedItems" class="collection padding">
+                    </ul>
+                </div>
+            </div>
+            <div class="card col l5 grey darken-3 white-text">
+                <span class="card-title">Pending Tasks</span>
+                <div class="card-content">
+                    <ul id="pendingItems" class="collection padding">
+                    </ul>
+                </div>
+            </div>
+        </div>  
     </div>
-    <script>
-
-        function addRow(){
-            var table = document.getElementById('todoTable');
-            var row = table.insertRow(table.rows.length);
-            var task = row.insertCell(0);
-            task.innerHTML += "<td>Learn Redux</td>";
-            var status = row.insertCell(1);
-            status.innerHTML += "<td><label><input type=\"checkbox\"/><span></span></label></td>";
-        }
-
-    </script>
 </body>
-
 </html>
