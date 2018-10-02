@@ -1,39 +1,44 @@
-let initialState = {
-    totalItems: 0,
-    todo: {},
-    completed: {},
-    pending: {}
-}
+// let initialState = {
+//     totalItems: 0,
+//     todo: {},
+//     completed: {},
+//     pending: {}
+// }
 
-function todos(state = initialState, action){
+function reducer_totalItems_todo_add(state = {count: 0},action){
     switch(action.type){
-        case ADD_TODO:
-            let id = initialState.totalItems+1;
-            let newtodo={};
-            newtodo[id] = {item: action.payload.item};
-            return Object.assign(
-                        {},
-                        initialState,
-                        {
-                            totalItems : initialState.totalItems+1,
-                            todo: {
-                                ...initialState.todo,
-                               newtodo
-                            },
-                        // completed,
-                            pending: Object.assign(
-                                {},
-                                initialState.pending,
-                                {id: {item: action.payload.item}}
-                             )
-                        }                        
-                    )
+        case ADD_TOTAL_ITEMS:
+            return {...state, count: state.count+1};
         default:
             return state;
     }
 }
 
+function reducer_addTodoList(state = {}, action){
+    switch(action.type){
+        case ADD_TODO_LIST:
+            let newTodo = {};
+            newTodo[action.payload.count] = action.payload.todo;
+            return {...state, ...newTodo}
+        default:
+            return state;
+    }
+}
+
+function reducer_addPendingList(state = {}, action){
+    switch(action.type){
+        case ADD_PENDING_LIST:
+            let pendingTodo = {};
+            pendingTodo[action.payload.count] = action.payload.todo;
+            return {...state, ...pendingTodo}
+        default: 
+            return state;
+    }
+}
+
 const todoApp = Redux.combineReducers({
-    todos
+    totalItems: reducer_totalItems_todo_add,
+    todoList: reducer_addTodoList,
+    pendingList: reducer_addPendingList
 });
 
