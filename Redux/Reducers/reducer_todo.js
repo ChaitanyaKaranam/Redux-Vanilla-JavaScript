@@ -5,6 +5,7 @@
 //     pending: {}
 // }
 
+// Add total to-do items
 function reducer_totalItems_todo_add(state = {count: 0},action){
     switch(action.type){
         case ADD_TOTAL_ITEMS:
@@ -14,6 +15,7 @@ function reducer_totalItems_todo_add(state = {count: 0},action){
     }
 }
 
+// Add new item in to-do list
 function reducer_addTodoList(state = {}, action){
     switch(action.type){
         case ADD_TODO_LIST:
@@ -25,9 +27,10 @@ function reducer_addTodoList(state = {}, action){
     }
 }
 
+// Add item to pending list
 function reducer_addPendingList(state = {}, action){
     switch(action.type){
-        case ADD_PENDING_LIST:
+        case ADD_NEW_PENDING_LIST:
             let pendingTodo = {};
             pendingTodo[action.payload.count] = action.payload.todo;
             return {...state, ...pendingTodo}
