@@ -10,31 +10,25 @@ let appState = {
 function addRow(e){
     e.preventDefault();
     if(document.getElementById('newTodo').value !== ''){
-        // Make modification to the DOM
-        let itemID = appState['totalItems'];
-        var table = document.getElementById('todoTable');
-        var row = table.insertRow(table.rows.length);
-        var task = row.insertCell(0);
-        task.innerHTML += "<td>"+document.getElementById('newTodo').value+"</td>";
-        task.setAttribute("id",`todoItem-${itemID}`);
-        var status = row.insertCell(1);
-        status.innerHTML += "<td><label><input id=\""+itemID+"\" type=\"checkbox\" onclick=\"toggleTodo(this)\"/><span></span></label></td>";
 
-        // Add todo state Object
-        if(!appState['todo'][itemID]){
-            appState['todo'][itemID] = { item: document.getElementById('newTodo').value};
-        }
+        //Call Actions
+        addTodo({item: document.getElementById('newTodo').value});
+
+        // // Add todo state Object
+        // if(!appState['todo'][itemID]){
+        //     appState['todo'][itemID] = { item: document.getElementById('newTodo').value};
+        // }
         
-        // Add Task to pending state object
-        if(!appState['pending'][itemID]){
-            appState['pending'][itemID] = {item: document.getElementById('newTodo').value}
-        }
+        // // Add Task to pending state object
+        // if(!appState['pending'][itemID]){
+        //     appState['pending'][itemID] = {item: document.getElementById('newTodo').value}
+        // }
 
-        // Render Pending DOM Elements
-        renderPendingElements(appState['pending'], itemID);
+        // // Render Pending DOM Elements
+        // renderPendingElements(appState['pending'], itemID);
 
-        // Increment the total number of items in state object
-        appState['totalItems'] += 1;
+        // // Increment the total number of items in state object
+        // appState['totalItems'] += 1;
 
         // clear input text in DOM
         document.getElementById('newTodo').value = "";   
@@ -90,12 +84,12 @@ function toggleTodo(cb){
 
 }
 
-function renderPendingElements(pending, itemID){
+// function renderPendingElements(pending, itemID){
     
-    // Make modification to DOM
-    var ul = document.getElementById('pendingItems');
-    var li = document.createElement('li');
-    li.appendChild(document.createTextNode(pending[itemID]['item']));
-    li.setAttribute("id", `pendingList-${itemID}`);
-    ul.appendChild(li);
-}
+//     // Make modification to DOM
+//     var ul = document.getElementById('pendingItems');
+//     var li = document.createElement('li');
+//     li.appendChild(document.createTextNode(pending[itemID]['item']));
+//     li.setAttribute("id", `pendingList-${itemID}`);
+//     ul.appendChild(li);
+// }

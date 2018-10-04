@@ -17,6 +17,7 @@
     <!-- Import Actions and Reducers-->
     <script src="Actions/actions.js"></script>
     <script src="Reducers/reducer_todo.js"></script>
+    <script src="render.js"></script>
     <title>Redux with Vanilla JavaScript</title>
 </head>
 <body>
@@ -32,7 +33,7 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="todoBody">
                 </tbody>
             </table>
             <input type="text" name="newTodo" id="newTodo" placeholder="Enter New To-do item" required>
@@ -57,18 +58,6 @@
             </div>
         </div>  
     </div>
-    <script>
-        const store = Redux.createStore(todoApp);
 
-        console.log(store.getState());
-
-        const UnSubscribe = store.subscribe(() => (console.log(store.getState())));
-
-        addTodo({item: 'Learn React'});
-        addTodo({item: 'Learn Redux'});
-        addTodo({item: 'Learn JavaScript'});
-        addTodo({item: 'Learn CSS'});
-
-    </script>
 </body>
 </html>
