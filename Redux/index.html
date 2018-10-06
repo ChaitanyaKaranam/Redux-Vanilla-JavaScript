@@ -58,6 +58,16 @@
             </div>
         </div>  
     </div>
-
+    <script>
+        function addRow(e){
+        e.preventDefault();
+            if(document.getElementById('newTodo').value !== ''){
+                //Call Actions
+                addTodo({item: document.getElementById('newTodo').value});
+                 // clear input text in DOM
+                document.getElementById('newTodo').value = "";   
+            }
+        }
+    </script>
 </body>
 </html>
