@@ -36,6 +36,27 @@ function addTodoList(todo){
     }
 }
 
+// Toggle Todo
+function toggleTodoItem(cb, id){
+    if(cb.checked){
+        // Get the list from pending and move it to complete
+        let item={};
+        item[id] = store.getState()['pendingList'][id];
+
+        // Add new item to completeList
+        store.dispatch(addCompleteList(item));
+        store.dispatch(removePendingList(item));
+    }else{
+        // Get the list from completed and move it to pending
+        let item={};
+        item[id] = store.getState()['completedList'][id];
+
+        // Remove item from completeList
+        store.dispatch(removeCompleteList(item));
+        store.dispatch(addPendingList(null,item));
+    }
+}
+
 // Add pending to-do item
 function addPendingList(todo, item=null){
     // If new item is added
@@ -57,19 +78,6 @@ function addPendingList(todo, item=null){
     }    
 }
 
-// Toggle Todo
-function toggleTodoItem(isChecked, item){
-    if(isChecked){
-        // Add new item to completeList
-        store.dispatch(addCompleteList(item));
-        store.dispatch(removePendingList(item));
-    }else{
-        // Remove item from completeList
-        store.dispatch(removeCompleteList(item));
-        store.dispatch(addPendingList(null,item));
-    }
-}
-
 // Add new item to complete List
 function addCompleteList(item){
     return{
@@ -82,7 +90,10 @@ function addCompleteList(item){
 function removePendingList(item){
     return{
         type: RM_PENDING_LIST,
-        payload: item
+        payload: {
+            state: store.getState()['pendingList'],
+            item
+        }
     }
 }
 
@@ -90,6 +101,9 @@ function removePendingList(item){
 function removeCompleteList(item){
     return{
         type: RM_COMPLETE_LIST,
-        payload: item
+        payload: {
+            state: store.getState()['completedList'],
+            item
+        }
     }
 }

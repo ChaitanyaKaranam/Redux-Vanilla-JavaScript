@@ -28,20 +28,54 @@ function reducer_addTodoList(state = {}, action){
 }
 
 // Add item to pending list
-function reducer_addPendingList(state = {}, action){
+function reducer_PendingList(state = {}, action){
     switch(action.type){
+
         case ADD_NEW_PENDING_LIST:
             let pendingTodo = {};
             pendingTodo[action.payload.count] = action.payload.todo;
-            return {...state, ...pendingTodo}
+            return {...state, ...pendingTodo};
+
+        case ADD_PENDING_LIST:
+            return {...state, ...action.payload};
+
+        case RM_PENDING_LIST:
+            let newState = action.payload.state;
+            for(id in action.payload['item']){
+                delete newState[id];
+            }
+            return newState;
+
         default: 
             return state;
     }
 }
 
+// Add to complete list
+function reducer_CompleteList(state = {}, action){
+    switch(action.type){
+
+        case ADD_COMPLETE_LIST:
+            return {...state, ...action.payload}
+
+        case RM_COMPLETE_LIST:
+            let newState = action.payload.state;
+            console.info(action.payload['item']);
+            for(id in action.payload['item']){
+                delete newState[id];
+            }
+            return newState;
+        
+        default:
+            return state;
+    }
+}
+
+
 const todoApp = Redux.combineReducers({
     totalItems: reducer_totalItems_todo_add,
     todoList: reducer_addTodoList,
-    pendingList: reducer_addPendingList
+    pendingList: reducer_PendingList,
+    completedList: reducer_CompleteList
 });
 
