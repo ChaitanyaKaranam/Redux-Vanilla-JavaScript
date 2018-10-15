@@ -15,8 +15,8 @@
     <script src="https://unpkg.com/redux@4.0.0/dist/redux.min.js"></script>
     
     <!-- Import Actions and Reducers-->
-    <script src="Actions/actions.js"></script>
-    <script src="Reducers/reducer_todo.js"></script>
+    <script src="actions/index.js"></script>
+    <script src="reducers/reducer_todo.js"></script>
     <script src="render.js"></script>
     <title>Redux with Vanilla JavaScript</title>
 </head>
@@ -58,6 +58,16 @@
             </div>
         </div>  
     </div>
-
+    <script>
+        function addRow(e){
+        e.preventDefault();
+            if(document.getElementById('newTodo').value !== ''){
+                //Call Actions
+                addTodo({item: document.getElementById('newTodo').value});
+                 // clear input text in DOM
+                document.getElementById('newTodo').value = "";   
+            }
+        }
+    </script>
 </body>
 </html>
